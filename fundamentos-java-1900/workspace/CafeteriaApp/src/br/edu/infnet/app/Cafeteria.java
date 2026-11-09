@@ -199,12 +199,12 @@ public class Cafeteria {
         double totalVenda
     ) {
         System.out.println("==== RESUMO DE VENDAS ====");
-        System.out.println("Total de pedidos realizados: " + totalPedidos);
-        System.out.println("Total de cafés vendidos: " + totalCafes);
-        System.out.println("Total de cappuccinos vendidos: " + totalCappuccinos);
-        System.out.println("Total de pães de queijo vendidos: " + totalPaesDeQueijo);
-        System.out.println("Total de sanduíches vendidos: " + totalSanduiches);
-        System.out.println("Total de vendas: R$" + totalVenda);
+        System.out.printf("Total de pedidos realizados: %d%n", totalPedidos);
+        System.out.printf("Total de cafés vendidos: %d%n", totalCafes);
+        System.out.printf("Total de cappuccinos vendidos: %d%n", totalCappuccinos);
+        System.out.printf("Total de pães de queijo vendidos: %d%n", totalPaesDeQueijo);
+        System.out.printf("Total de sanduíches vendidos: %d%n", totalSanduiches);
+        System.out.printf("Total de vendas: R$ %.2f%n", totalVenda);
         System.out.println();
         
     }
@@ -226,18 +226,19 @@ public class Cafeteria {
 
     public static void exibirItem(String produto, double preco, int quantidade,double subTotal) {
         System.out.println();
+        System.out.println("==== ITEM DO PEDIDO ====");
         System.out.println("Produto: " + produto);
-        System.out.println("Preço: R$ " + preco);
-        System.out.println("Quantidade: " + quantidade);
+        System.out.printf("Preço: R$ %.2f%n", preco);
+        System.out.printf("Quantidade: %d%n", quantidade);
         System.out.println("------");
-        System.out.println("Subtotal: R$ " + subTotal);
+        System.out.printf("Subtotal: R$ %.2f%n", subTotal);
     }
 
     public static void exibirPedidoFinalizado(String nome, double totalPedido) {
         System.out.println();
         System.out.println("==== PEDIDO FINALIZADO ====");
         System.out.println("Cliente: " + nome);
-        System.out.println("Total do Pedido: R$" + totalPedido);
+        System.out.printf("Total do Pedido: R$ %.2f%n", totalPedido);
     }
 
     public static void analisarPedidoEmTexto(Scanner entrada) {
@@ -264,9 +265,58 @@ public class Cafeteria {
             return;
         }
 
-        System.out.println("Pedido - Código: " + partes[0]);
+        String codigo = normalizarCodigo(partes[0]);
+
+        if (!codigoValido(codigo)) {
+            System.out.println("Código inválido. Tente novamente.");
+            return;
+        }
+
+        System.out.println("Pedido - Código: " + codigo);
         System.out.println("Pedido - Quantidade: " + partes[1]);
         System.out.println("Pedido - Nome do cliente: " + partes[2]);
 
+    }
+
+    public static String normalizarCodigo(String codigo) {
+        // Remove espaços em branco no início e no final e converte para maiúsculas
+        return codigo.trim().toUpperCase();
+    }
+
+    public static boolean codigoValido(String codigo) {
+        // Verifica se o código começa com 3 letras e 4 números
+        if (codigo.length() != 7) {
+            return false;
+        }
+
+        if (!Character.isLetter(codigo.charAt(0)) || codigo.charAt(0) < 'A' || codigo.charAt(0) > 'Z') {
+            return false;
+        }
+        
+        if (!Character.isLetter(codigo.charAt(1)) || codigo.charAt(1) < 'A' || codigo.charAt(1) > 'Z') {
+            return false;
+        }
+
+        if (!Character.isLetter(codigo.charAt(2)) || codigo.charAt(2) < 'A' || codigo.charAt(2) > 'Z') {
+            return false;
+        }
+
+        if (!Character.isDigit(codigo.charAt(3))) {
+            return false;
+        }
+
+        if (!Character.isDigit(codigo.charAt(4))) {
+            return false;
+        }
+
+        if (!Character.isDigit(codigo.charAt(5))) {
+            return false;
+        }
+
+        if (!Character.isDigit(codigo.charAt(6))) {
+            return false;
+        }
+
+        return true;
     }
 }
