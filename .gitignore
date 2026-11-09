@@ -1,0 +1,20 @@
+# Trabalhos avaliativos (não versionar)
+TP1/
+*.zip
+
+# Java compilado
+*.class
+bin/
+out/
+
+# IDEs
+.idea/
+*.iml
+.classpath
+.project
+.settings/
+
+# Sistema operacional
+Thumbs.db
+desktop.ini
+.DS_Store
