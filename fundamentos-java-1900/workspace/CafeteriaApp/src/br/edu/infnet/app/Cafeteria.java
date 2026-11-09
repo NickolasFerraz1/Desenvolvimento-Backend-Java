@@ -121,6 +121,10 @@ public class Cafeteria {
                     exibirSobre();
                     System.out.println();
                     break;
+                case 5:
+                    analisarPedidoEmTexto(in);
+                    System.out.println();
+                    break;
                 case 0:
                     System.out.println("Saindo do sistema...");
                     break;
@@ -162,6 +166,7 @@ public class Cafeteria {
             System.out.println("2 - Exibir Cardápio");
             System.out.println("3 - Exibir Resumo de vendas");
             System.out.println("4 - Sobre o sistema");
+            System.out.println("5 - Analisar pedido em texto");
             System.out.println("0 - Sair");
             System.out.println();
     }
@@ -233,5 +238,35 @@ public class Cafeteria {
         System.out.println("==== PEDIDO FINALIZADO ====");
         System.out.println("Cliente: " + nome);
         System.out.println("Total do Pedido: R$" + totalPedido);
+    }
+
+    public static void analisarPedidoEmTexto(Scanner entrada) {
+        System.out.println("==== ANALISAR PEDIDO EM TEXTO ====");
+        
+        entrada.nextLine(); // Limpar o buffer
+        
+        System.out.print("Informe o pedido em texto: ");
+        String pedido = entrada.nextLine(); //"CAF1234";3;Maria";
+
+        if (pedido.isBlank()) {
+            System.out.println("Pedido em texto inválido. Tente novamente.");
+            return;
+            //Quando inserimos um return no método void, 
+            // ele encerra a execução do método naquele ponto e retorna ao 
+            // ponto de chamada, sem executar o restante do código dentro do
+            // método.
+        }
+        
+        String[] partes = pedido.split(";");
+
+        if (partes.length != 3) {
+            System.out.println("Pedido em texto inválido. Tente novamente.");
+            return;
+        }
+
+        System.out.println("Pedido - Código: " + partes[0]);
+        System.out.println("Pedido - Quantidade: " + partes[1]);
+        System.out.println("Pedido - Nome do cliente: " + partes[2]);
+
     }
 }
