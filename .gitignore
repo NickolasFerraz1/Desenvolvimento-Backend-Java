@@ -18,3 +18,7 @@ out/
 Thumbs.db
 desktop.ini
 .DS_Store
+
+# Trabalhos e atividades avaliativas (TP*, AT*)
+TP*
+AT*
